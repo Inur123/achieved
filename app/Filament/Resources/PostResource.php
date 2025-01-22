@@ -42,22 +42,25 @@ class PostResource extends Resource
                 TinyEditor::make('content'),
 
                 Forms\Components\TextArea::make('excerpt')  // Add this field for excerpt
-                ->required()
-                ->maxLength(255)  // Optional, you can adjust the length limit
-                ->helperText('A short summary or preview of the post'),
+                    ->required()
+                    ->maxLength(255)  // Optional, you can adjust the length limit
+                    ->helperText('A short summary or preview of the post'),
                 Forms\Components\FileUpload::make('thumbnail')
                     ->image()
                     ->disk('public')
                     ->directory('thumbnails')
                     ->visibility('public')
                     ->nullable(),
+                Forms\Components\Select::make('author_id')
+                    ->relationship('author', 'name')
+                    ->required(),
 
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
 
                 Forms\Components\SpatieTagsInput::make('name')
-                ->label('Tags')
+                    ->label('Tags')
                     ->required(),
 
                 Forms\Components\DateTimePicker::make('published_at'),
@@ -82,11 +85,16 @@ class PostResource extends Resource
                     ->label('Thumbnail')
                     ->disk('public') // Gunakan disk 'public'
                     ->getStateUsing(fn($record) => asset('storage/' . $record->thumbnail)),
+                Tables\Columns\TextColumn::make('author.name')->label('Author'),
+                Tables\Columns\ImageColumn::make('author.photo')
+                ->label('Author Photo')
+                ->disk('public')  // Pastikan disk yang digunakan adalah 'public'
+                ->getStateUsing(fn($record) => asset('storage/' . $record->author->photo)),
                 Tables\Columns\TextColumn::make('category.name')->label('Category'),
                 Tables\Columns\SpatieTagsColumn::make('name')->label('Tags'),
                 Tables\Columns\TextColumn::make('excerpt')  // Add this line to display the excerpt
-                ->label('Excerpt')
-                ->limit(20),
+                    ->label('Excerpt')
+                    ->limit(20),
                 Tables\Columns\TextColumn::make('is_published')
                     ->label('Published')
                     ->getStateUsing(fn($record) => $record->is_published == 1 ? 'Publish' : 'No Publish')

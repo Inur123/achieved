@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('author_id')->nullable()->constrained('authors')->onDelete('set null');
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->boolean('is_published')->default(false);
             $table->timestamp('published_at')->nullable();
+            $table->integer('visits')->default(0);
             $table->timestamps();
         });
     }

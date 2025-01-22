@@ -13,7 +13,7 @@ class Post extends Model
     use HasFactory, HasTags;
 
     protected $fillable = [
-        'title', 'content', 'category_id', 'slug', 'thumbnail', 'is_published', 'published_at', 'user_id','excerpt'
+        'title', 'content', 'category_id', 'slug', 'thumbnail', 'is_published', 'published_at', 'user_id','excerpt','author_id',
     ];
 
     // Automatically set user_id for new posts
@@ -58,4 +58,8 @@ class Post extends Model
     {
         return 'slug'; // Use 'slug' as the route key
     }
+    public function author()
+{
+    return $this->belongsTo(Author::class);
+}
 }
