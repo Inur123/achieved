@@ -13,7 +13,7 @@ class Post extends Model
     use HasFactory, HasTags;
 
     protected $fillable = [
-        'title', 'content', 'category_id', 'slug', 'thumbnail', 'is_published', 'published_at', 'user_id'
+        'title', 'content', 'category_id', 'slug', 'thumbnail', 'is_published', 'published_at', 'user_id','excerpt'
     ];
 
     // Automatically set user_id for new posts

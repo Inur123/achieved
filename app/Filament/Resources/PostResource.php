@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Filament\Resources;
+
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
@@ -25,6 +26,7 @@ class PostResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
+                    ->unique('posts', 'title')
                     ->maxLength(255)
                     ->reactive()
                     ->afterStateUpdated(function (callable $set, $state) {
@@ -34,10 +36,15 @@ class PostResource extends Resource
 
                 Forms\Components\TextInput::make('slug')
                     ->required()
+                    ->unique('posts', 'slug')
                     ->disabled(),
 
                 TinyEditor::make('content'),
 
+                Forms\Components\TextArea::make('excerpt')  // Add this field for excerpt
+                ->required()
+                ->maxLength(255)  // Optional, you can adjust the length limit
+                ->helperText('A short summary or preview of the post'),
                 Forms\Components\FileUpload::make('thumbnail')
                     ->image()
                     ->disk('public')
@@ -50,7 +57,7 @@ class PostResource extends Resource
                     ->required(),
 
                 Forms\Components\SpatieTagsInput::make('name')
-
+                ->label('Tags')
                     ->required(),
 
                 Forms\Components\DateTimePicker::make('published_at'),
@@ -74,13 +81,16 @@ class PostResource extends Resource
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->label('Thumbnail')
                     ->disk('public') // Gunakan disk 'public'
-                    ->getStateUsing(fn ($record) => asset('storage/' . $record->thumbnail)),
+                    ->getStateUsing(fn($record) => asset('storage/' . $record->thumbnail)),
                 Tables\Columns\TextColumn::make('category.name')->label('Category'),
                 Tables\Columns\SpatieTagsColumn::make('name')->label('Tags'),
+                Tables\Columns\TextColumn::make('excerpt')  // Add this line to display the excerpt
+                ->label('Excerpt')
+                ->limit(20),
                 Tables\Columns\TextColumn::make('is_published')
                     ->label('Published')
-                    ->getStateUsing(fn ($record) => $record->is_published == 1 ? 'Publish' : 'No Publish')
-                    ->color(fn ($record) => $record->is_published == 1 ? 'success' : 'danger'),
+                    ->getStateUsing(fn($record) => $record->is_published == 1 ? 'Publish' : 'No Publish')
+                    ->color(fn($record) => $record->is_published == 1 ? 'success' : 'danger'),
                 Tables\Columns\TextColumn::make('published_at')->dateTime(),
                 Tables\Columns\TextColumn::make('visits'),
             ])
@@ -113,6 +123,4 @@ class PostResource extends Resource
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
-
-
 }
