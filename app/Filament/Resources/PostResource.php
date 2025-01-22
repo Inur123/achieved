@@ -49,6 +49,10 @@ class PostResource extends Resource
                     ->relationship('category', 'name')
                     ->required(),
 
+                Forms\Components\SpatieTagsInput::make('name')
+
+                    ->required(),
+
                 Forms\Components\DateTimePicker::make('published_at'),
 
                 Forms\Components\Toggle::make('is_published')
@@ -72,6 +76,7 @@ class PostResource extends Resource
                     ->disk('public') // Gunakan disk 'public'
                     ->getStateUsing(fn ($record) => asset('storage/' . $record->thumbnail)),
                 Tables\Columns\TextColumn::make('category.name')->label('Category'),
+                Tables\Columns\SpatieTagsColumn::make('name')->label('Tags'),
                 Tables\Columns\TextColumn::make('is_published')
                     ->label('Published')
                     ->getStateUsing(fn ($record) => $record->is_published == 1 ? 'Publish' : 'No Publish')

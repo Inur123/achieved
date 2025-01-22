@@ -6,10 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Tags\HasTags;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTags;
 
     protected $fillable = [
         'title', 'content', 'category_id', 'slug', 'thumbnail', 'is_published', 'published_at', 'user_id'
