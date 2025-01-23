@@ -16,7 +16,11 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     // Ikon dan Grup Navigasi
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack'; // Ikon menu
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $modelLabel = 'Category';
+
+    protected static ?string $navigationGroup = 'Blog';
 
     // Formulir untuk Tambah/Edit
     public static function form(Form $form): Form
