@@ -41,7 +41,8 @@ class AuthorResource extends Resource
                     ->image()
                     ->disk('public')  // Specify the disk for storing the image
                     ->label('Author Photo')
-                    ->nullable(),  // Make the photo optional
+                    ->nullable()
+                    ->optimize('webp'),  // Make the photo optional
 
                 // Form field for author description (textarea)
                 Forms\Components\Textarea::make('description')

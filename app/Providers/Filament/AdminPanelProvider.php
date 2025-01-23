@@ -56,12 +56,19 @@ class AdminPanelProvider extends PanelProvider
 
             ->authMiddleware([
                 Authenticate::class,
+                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
             ])
+
+
+
 
            ->plugins([
             LightSwitchPlugin::make()
                 ->position(Alignment::BottomRight),
-             ]);
+             ])
+             ->plugin(
+                \Hasnayeen\Themes\ThemesPlugin::make()
+            );
 
 
     }

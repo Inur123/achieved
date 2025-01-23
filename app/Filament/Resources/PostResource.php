@@ -54,6 +54,7 @@ class PostResource extends Resource
                     ->disk('public')
                     ->directory('thumbnails')
                     ->visibility('public')
+                    ->optimize('webp')
                     ->nullable(),
                 Forms\Components\Select::make('author_id')
                     ->relationship('author', 'name')

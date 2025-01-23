@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1c94443335495e55830379882aeb737",
+    "content-hash": "212783c64bb19b38eecdfacdfd2632cc",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2067,6 +2067,242 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "hasnayeen/themes",
+            "version": "v3.0.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Hasnayeen/themes.git",
+                "reference": "6f5cc1719719591d31c30e6f971fe5cede7aa000"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Hasnayeen/themes/zipball/6f5cc1719719591d31c30e6f971fe5cede7aa000",
+                "reference": "6f5cc1719719591d31c30e6f971fe5cede7aa000",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "illuminate/contracts": "^10.0|^11.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hasnayeen\\Themes\\ThemesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hasnayeen\\Themes\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hasnayeen",
+                    "email": "searching.nehal@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Themes for Filament panels",
+            "homepage": "https://github.com/hasnayeen/themes",
+            "keywords": [
+                "Hasnayeen",
+                "filament",
+                "laravel",
+                "themes"
+            ],
+            "support": {
+                "issues": "https://github.com/hasnayeen/themes/issues",
+                "source": "https://github.com/hasnayeen/themes"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Hasnayeen",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-10T06:31:54+00:00"
+        },
+        {
+            "name": "intervention/image",
+            "version": "2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/04be355f8d6734c826045d02a1079ad658322dad",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1 || ^2.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    },
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/2.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-21T17:30:32+00:00"
+        },
+        {
+            "name": "joshembling/image-optimizer",
+            "version": "v1.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joshembling/image-optimizer.git",
+                "reference": "56f74bb5afdaabe87189b3cc49e04023b7973730"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joshembling/image-optimizer/zipball/56f74bb5afdaabe87189b3cc49e04023b7973730",
+                "reference": "56f74bb5afdaabe87189b3cc49e04023b7973730",
+                "shasum": ""
+            },
+            "require": {
+                "filament/forms": "^3.0",
+                "illuminate/contracts": "^10.0|^11.0",
+                "intervention/image": "^2.7",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "orchestra/testbench": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "ImageOptimizer": "Joshembling\\ImageOptimizer\\Facades\\ImageOptimizer"
+                    },
+                    "providers": [
+                        "Joshembling\\ImageOptimizer\\ImageOptimizerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Joshembling\\ImageOptimizer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Embling",
+                    "email": "joshembling@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optimize your Filament images before they reach your database.",
+            "homepage": "https://github.com/joshembling/image-optimizer",
+            "keywords": [
+                "filament",
+                "filamentphp",
+                "image",
+                "image-optimizer",
+                "joshembling",
+                "laravel",
+                "optimization"
+            ],
+            "support": {
+                "issues": "https://github.com/joshembling/image-optimizer/issues",
+                "source": "https://github.com/joshembling/image-optimizer"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/joshembling",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-17T12:28:28+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
