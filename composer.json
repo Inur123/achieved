@@ -16,6 +16,7 @@
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.3",
+        "shuvroroy/filament-spatie-laravel-health": "^2.3",
         "tomatophp/filament-language-switcher": "^1.0"
     },
     "require-dev": {

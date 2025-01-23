@@ -20,6 +20,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Awcodes\LightSwitch\Enums\Alignment;
 use Brickx\MaintenanceSwitch\MaintenanceSwitchPlugin;
+use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -66,10 +67,14 @@ class AdminPanelProvider extends PanelProvider
            ->plugins([
             LightSwitchPlugin::make()
                 ->position(Alignment::BottomRight),
+
              ])
              ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make()
             )
+
+            ->plugin(FilamentSpatieLaravelHealthPlugin::make())
+
             ->plugins([
                 MaintenanceSwitchPlugin::make(),
             ]);
