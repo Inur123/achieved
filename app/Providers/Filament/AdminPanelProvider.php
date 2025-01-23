@@ -19,6 +19,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Awcodes\LightSwitch\Enums\Alignment;
+use Brickx\MaintenanceSwitch\MaintenanceSwitchPlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -68,7 +69,10 @@ class AdminPanelProvider extends PanelProvider
              ])
              ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make()
-            );
+            )
+            ->plugins([
+                MaintenanceSwitchPlugin::make(),
+            ]);
 
 
     }
