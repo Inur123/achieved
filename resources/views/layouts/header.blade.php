@@ -12,15 +12,18 @@ style="
 <div class="container mx-auto px-4">
   <div class="flex items-center justify-between py-4">
     <div class="flex items-center">
-      <img
-        src="{{ asset('images/peta-logo.png') }}"
-        alt="Liputan6 Logo"
-        class="h-12 mr-2"
-      />
-      <div class="flex items-center font-sub">
-        <div class="text-3xl font-bold text-[#be2c13] mr-2">Peta</div>
-        <div class="text-3xl font-bold text-white mr-2">Project</div>
-      </div>
+        <a href="{{ url('/') }}" class="flex items-center">
+            <img
+                src="{{ asset('images/peta-logo.png') }}"
+                alt="Peta Project Logo"
+                class="h-12 mr-2"
+            />
+            <div class="flex items-center font-sub">
+                <div class="text-3xl font-bold text-[#be2c13] mr-2">Peta</div>
+                <div class="text-3xl font-bold text-white mr-2">Project</div>
+            </div>
+        </a>
+
     </div>
 
     <div class="md:hidden">

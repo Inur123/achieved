@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Post;
 use App\Models\Iklan;
+use App\Models\Video;
 use Spatie\Health\Facades\Health;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -45,5 +46,16 @@ class AppServiceProvider extends ServiceProvider
             'post_populer' => $post_populer,
             'iklan' => $iklan, // Bagikan iklan ke semua view
         ]);
+
+        $videos_terbaru = Video::latest()
+        ->take(5)
+        ->get(['id', 'title', 'url']);
+
+    // Bagikan ke semua view
+    View::share([
+        'post_populer' => $post_populer,
+        'iklan' => $iklan,
+        'videos_terbaru' => $videos_terbaru, // Tambahkan video terbaru ke semua view
+    ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Spatie\Tags\Tag;
 use App\Models\Iklan;
+use App\Models\Video;
 
 
 class HomeController extends Controller
@@ -40,7 +41,11 @@ class HomeController extends Controller
                 ->take(5)
                 ->pluck('title')
                 ->toArray();
+
     $iklan = Iklan::latest()->take(2)->get();
+
+    $vidio = Video::latest()->take(3)->get();
+
 
     return view('welcome', compact('post_terkini', 'berita_terkini', 'opini_terkini', 'podcast_terkini','post_populer','messages','iklan'));
 }

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $berita->title)
+@section('description', strip_tags($berita->content)) <!-- You can modify this to provide a shorter description -->
+@section('image', Storage::url($berita->thumbnail))
 
 @include('layouts.header')
 
@@ -41,7 +43,21 @@
                     </div>
                 </div>
             </div>
+            <div class="flex items-center space-x-3 mt-3">
+                <h4 class="text-xl font-semibold text-gray-900">Bagikan:</h4>
+                <a href="https://wa.me/?text={{ urlencode(url()->current()) }}" target="_blank">
+                    <img src="{{ asset('images/wa.png') }}" alt="WhatsApp" class="w-10 h-10">
+                </a>
+
+            </div>
+
+
+
         </div>
+          <!-- Bagikan ke WhatsApp -->
+
+
+
 
         <!-- Sidebar -->
 

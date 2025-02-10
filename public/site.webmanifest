@@ -1,0 +1,21 @@
+{
+    "name": "Peta Project",
+    "short_name": "Peta Project",
+    "description": "Website berita, opini, dan podcast terbaik!, Podcast dan Talkshow yang memiliki visi menjadi sumber cahaya yang menerangi kompleksitas sosial, politik, hukum dan isu-isu terkini. Peta project hadir sebagai media education dalam melakukan transfer of knowladge, transfer of tools, opinion making dan paradigma shifting.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ff0000",
+    "icons": [
+      {
+        "src": "/images/peta-logo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/images/peta-logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+}

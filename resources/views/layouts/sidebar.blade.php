@@ -16,25 +16,13 @@
         <h2 class="text-xl font-bold mb-4">Vidio Terbaru</h2>
         <div class="space-y-4">
             <div>
+                @foreach($videos_terbaru as $video)
                 <div class="h-40 mb-2">
-                    <iframe src="https://www.youtube.com/embed/DXMfoLTIeoE" title="YouTube video player" frameborder="0"
+                    <iframe src="{{ $video->url }}" title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen style="height: 100%; width: 100%; border-radius: 10px"></iframe>
                 </div>
-            </div>
-            <div>
-                <div class="h-40 mb-2">
-                    <iframe src="https://www.youtube.com/embed/DXMfoLTIeoE" title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen style="height: 100%; width: 100%; border-radius: 10px"></iframe>
-                </div>
-            </div>
-            <div>
-                <div class="h-40 mb-2">
-                    <iframe src="https://www.youtube.com/embed/DXMfoLTIeoE" title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen style="height: 100%; width: 100%; border-radius: 10px"></iframe>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

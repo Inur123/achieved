@@ -9,11 +9,46 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/peta-logo.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/peta-logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/peta-logo.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <meta property="og:site_name" content="Peta Project">
+
+
+
+    @if (Route::is('berita.show'))
+        <meta property="og:title" content="{{ $berita->title }}">
+        <meta property="og:description" content="{{ Str::limit(strip_tags($berita->content), 150) }}">
+        <meta property="og:image" content="{{ asset('storage/' . $berita->thumbnail) }}">
+        <meta property="og:url" content="{{ route('berita.show', $berita->slug) }}">
+        <meta property="og:type" content="article">
+
+    @elseif (Route::is('opini.show'))
+        <meta property="og:title" content="{{ $opini->title }}">
+        <meta property="og:description" content="{{ Str::limit(strip_tags($opini->content), 150) }}">
+        <meta property="og:image" content="{{ asset('storage/' . $opini->thumbnail) }}">
+
+        <meta property="og:url" content="{{ route('opini.show', $opini->slug) }}">
+        <meta property="og:type" content="article">
+
+    @elseif (Route::is('podcast.show'))
+        <meta property="og:title" content="{{ $podcast->title }}">
+        <meta property="og:description" content="{{ Str::limit(strip_tags($podcast->description), 150) }}">
+        <meta property="og:image" content="{{ Storage::url($podcast->thumbnail) }}">
+        <meta property="og:url" content="{{ route('podcast.show', $podcast->slug) }}">
+        <meta property="og:type" content="video">
+
+    @endif
+
+
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
         body {
             font-family: "Poppins", sans-serif;
+
+
         }
 
         .img {
@@ -73,31 +108,40 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: #ffffff; /* Warna putih full */
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 9999;
-      ">
+    ">
         <div
             style="
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          border: 5px solid red;
-          border-top-color: white;
-          animation: spin 1s linear infinite;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 5px solid red;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
         ">
         </div>
     </div>
+
     <!-- Header -->
 
     <!-- Breaking News -->
 
     <!-- Main Content -->
 
-        @yield('content')
+    @yield('content')
 
+    <!-- Tombol Scroll ke Atas -->
+    <button id="scrollToTopBtn" onclick="scrollToTop()"
+        class="hidden fixed bottom-5 right-5 w-12 h-12 bg-peta-red text-white rounded-full flex items-center justify-center shadow-lg transition-opacity duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+            stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
 
     <!-- Footer -->
 
@@ -119,6 +163,27 @@
             const loadingScreen = document.getElementById("loading-screen");
             loadingScreen.style.display = "none";
         });
+    </script>
+    <script>
+        // Tampilkan tombol scroll ke atas saat pengguna mulai menggulir
+        window.addEventListener("scroll", () => {
+            const scrollBtn = document.getElementById("scrollToTopBtn");
+            if (window.scrollY > 200) {
+                scrollBtn.classList.remove("hidden");
+                scrollBtn.classList.add("opacity-100");
+            } else {
+                scrollBtn.classList.add("hidden");
+                scrollBtn.classList.remove("opacity-100");
+            }
+        });
+
+        // Fungsi untuk kembali ke atas halaman
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
