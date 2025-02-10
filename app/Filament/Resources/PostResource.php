@@ -29,55 +29,55 @@ class PostResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->unique('posts', 'title')
+                    ->unique(ignoreRecord: true) // Mengabaikan unique untuk edit
                     ->maxLength(255)
                     ->reactive()
+                    ->disabled(fn($record) => $record !== null) // Hanya bisa diubah saat create
                     ->afterStateUpdated(function (callable $set, $state) {
-                        // Automatically set slug when title is changed
                         $set('slug', Str::slug($state));
                     }),
 
                 Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->unique('posts', 'slug')
+                    ->unique(ignoreRecord: true)
                     ->disabled(),
 
-                TinyEditor::make('content'),
+                TinyEditor::make('content')
+                    ->nullable(),
 
-                Forms\Components\TextArea::make('excerpt')  // Add this field for excerpt
-                    ->required()
-                    ->maxLength(255)  // Optional, you can adjust the length limit
-                    ->helperText('A short summary or preview of the post'),
+                Forms\Components\TextArea::make('excerpt')
+                    ->maxLength(255)
+                    ->nullable(),
+
                 Forms\Components\FileUpload::make('thumbnail')
                     ->image()
                     ->disk('public')
                     ->directory('thumbnails')
                     ->visibility('public')
-                    ->optimize('webp')
                     ->nullable(),
+
                 Forms\Components\Select::make('author_id')
                     ->relationship('author', 'name')
-                    ->required(),
+                    ->disabled(fn($record) => $record !== null), // Hanya bisa diubah saat create
 
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
-                    ->required(),
+                    ->disabled(fn($record) => $record !== null), // Hanya bisa diubah saat create
 
                 Forms\Components\SpatieTagsInput::make('name')
                     ->label('Tags')
-                    ->required(),
+                    ->nullable(),
 
-                Forms\Components\DateTimePicker::make('published_at'),
+                Forms\Components\DateTimePicker::make('published_at')
+                    ->nullable(),
 
                 Forms\Components\Toggle::make('is_published')
-                    ->label('Published'),
+                    ->label('Published')
+                    ->default(false), // Tetap bisa diubah kapan saja
 
                 Forms\Components\Hidden::make('user_id')
                     ->default(auth()->id()),
             ]);
     }
-
 
 
 
