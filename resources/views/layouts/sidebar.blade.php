@@ -3,10 +3,12 @@
     <div class="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 class="text-xl font-bold mb-2">Iklan</h2>
         <ul class="space-y-4">
+            @foreach($iklan as $item)
             <li class="flex items-center justify-center">
-                <img src="{{ asset('images/peta-logo.png') }}" alt="Iklan 1" class="rounded-lg object-contain"
+                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="rounded-lg object-contain"
                     style="width: 400px; height: 400px" />
             </li>
+            @endforeach
         </ul>
     </div>
     <!-- Video Section -->

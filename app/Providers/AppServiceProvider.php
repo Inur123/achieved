@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Post;
+use App\Models\Iklan;
 use Spatie\Health\Facades\Health;
-use Spatie\Health\Checks\Checks\OptimizedAppCheck;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
-use Illuminate\Support\Facades\View;
-use App\Models\Post;
+use Spatie\Health\Checks\Checks\OptimizedAppCheck;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -36,5 +37,13 @@ class AppServiceProvider extends ServiceProvider
 
         // Bagikan ke semua view
         View::share('post_populer', $post_populer);
+
+        $iklan = Iklan::latest()->take(5)->get();
+
+        // Bagikan ke semua view
+        View::share([
+            'post_populer' => $post_populer,
+            'iklan' => $iklan, // Bagikan iklan ke semua view
+        ]);
     }
 }

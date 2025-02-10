@@ -2,11 +2,12 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use Filament\Widgets\StatsOverviewWidget\Stat;
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Iklan;
+use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
+use Filament\Widgets\StatsOverviewWidget\Stat;
+use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class DashboardStatsWidget extends BaseWidget
 {
@@ -24,6 +25,12 @@ class DashboardStatsWidget extends BaseWidget
             Stat::make('Total Visits', Cache::remember('total_visits', 60, fn() => Post::sum('visits')))
                 ->description('Jumlah total kunjungan semua postingan')
                 ->color('warning'),
+
+            Stat::make('Total Iklan', Cache::remember('total_ads', 60, fn() => Iklan::count()))
+                ->description('Jumlah iklan yang ada')
+                ->color('info'),
+
+
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Spatie\Tags\Tag;
+use App\Models\Iklan;
 
 
 class HomeController extends Controller
@@ -39,9 +40,9 @@ class HomeController extends Controller
                 ->take(5)
                 ->pluck('title')
                 ->toArray();
+    $iklan = Iklan::latest()->take(2)->get();
 
-
-    return view('welcome', compact('post_terkini', 'berita_terkini', 'opini_terkini', 'podcast_terkini','post_populer','messages'));
+    return view('welcome', compact('post_terkini', 'berita_terkini', 'opini_terkini', 'podcast_terkini','post_populer','messages','iklan'));
 }
 
 }
