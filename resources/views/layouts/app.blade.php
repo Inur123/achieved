@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title')</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('images/peta-logo.png') }}" />
+    <title>Peta Project | @yield('title')</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/peta-logo.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/peta-logo.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/peta-logo.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <meta property="og:site_name" content="Peta Project">
 

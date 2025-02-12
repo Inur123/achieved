@@ -21,6 +21,7 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Awcodes\LightSwitch\Enums\Alignment;
 use Brickx\MaintenanceSwitch\MaintenanceSwitchPlugin;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
+use Illuminate\Support\Facades\URL;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -29,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->favicon(URL::asset('images/peta-logo.png'))
             ->login()
             ->colors([
                 'primary' => Color::Amber,

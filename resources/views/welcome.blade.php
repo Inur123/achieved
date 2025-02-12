@@ -1,8 +1,27 @@
 @extends('layouts.app')
 <!-- ===== Header Start ===== -->
+
+<meta property="og:title" content="Peta Project">
+<meta property="og:description" content="Peta Project adalah portal berita independen yang menyajikan analisis sosial, politik, hukum, dan isu-isu terkini secara mendalam dan kritis.">
+<meta property="og:image" content="{{ url(asset('images/peta-logo.png')) }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:url" content="{{ url('/') }}">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Peta Project">
+<meta name="twitter:description" content="Portal berita independen yang menghadirkan analisis sosial, politik, hukum, dan isu-isu terkini.">
+<meta name="twitter:image" content="{{ asset('images/peta-logo.png') }}">
+
+
 @section('title', 'Beranda')
 
 @include('layouts.header')
+
+
 
 
 
@@ -90,42 +109,48 @@
                 <!-- News Category -->
                 <div>
                     <h2 class="text-xl font-bold mb-4 text-red-600">Berita</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Repeat news items here -->
-                        @foreach ($berita_terkini as $berita)
-                            <a href="{{ route('berita.show', $berita->slug) }}" class="block">
-                                <div
-                                    class="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden flex flex-col relative hover:border-red-600 transition-all duration-300">
-                                    <img src="{{ Storage::url($berita->thumbnail) }}" alt="{{ $berita->title }}"
-                                        class="w-full h-48 object-cover" />
-                                    <div class="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full">
-                                        <span class="text-xs">{{ $berita->category->name ?? 'Uncategorized' }}</span>
-                                    </div>
-                                    <div class="p-4 flex-grow">
-                                        <div class="flex items-center justify-between mb-2">
-                                            <div>
-                                                <span class="text-gray-500 text-xs">Penulis:
-                                                    {{ $berita->author->name ?? 'Anonim' }}</span>
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="text-gray-500 text-xs">{{ $berita->created_at->format('d M Y') }}</span>
-                                            </div>
+
+                    @if ($berita_terkini->isNotEmpty())
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            @foreach ($berita_terkini as $berita)
+                                <a href="{{ route('berita.show', $berita->slug) }}" class="block">
+                                    <div
+                                        class="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden flex flex-col relative hover:border-red-600 transition-all duration-300">
+                                        <img src="{{ Storage::url($berita->thumbnail) }}" alt="{{ $berita->title }}"
+                                            class="w-full h-48 object-cover" />
+                                        <div class="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full">
+                                            <span class="text-xs">{{ $berita->category->name ?? 'Uncategorized' }}</span>
                                         </div>
-                                        <h3 class="font-bold mb-2">{{ $berita->title }}</h3>
-                                        <p class="text-gray-600 text-sm">
-                                            {{ Str::limit(strip_tags($berita->content), 100, '...') }}
-                                        </p>
+                                        <div class="p-4 flex-grow">
+                                            <div class="flex items-center justify-between mb-2">
+                                                <div>
+                                                    <span class="text-gray-500 text-xs">Penulis:
+                                                        {{ $berita->author->name ?? 'Anonim' }}</span>
+                                                </div>
+                                                <div>
+                                                    <span
+                                                        class="text-gray-500 text-xs">{{ $berita->created_at->format('d M Y') }}</span>
+                                                </div>
+                                            </div>
+                                            <h3 class="font-bold mb-2">{{ $berita->title }}</h3>
+                                            <p class="text-gray-600 text-sm">
+                                                {{ Str::limit(strip_tags($berita->content), 100, '...') }}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="text-gray-500 text-center">Tidak ada berita terbaru saat ini.</p>
+                    @endif
                 </div>
+
 
                 <!-- Opini Category -->
                 <div>
                     <h2 class="text-xl font-bold mb-4 text-red-600">Opini</h2>
+                    @if ($opini_terkini->isNotEmpty())
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Repeat opinion items here -->
                         @foreach ($opini_terkini as $berita)
@@ -157,11 +182,15 @@
                             </a>
                         @endforeach
                     </div>
+                    @else
+                    <p class="text-gray-500 text-center">Tidak ada Opini terbaru saat ini.</p>
+                @endif
                 </div>
 
                 <!-- Podcast Category -->
                 <div>
                     <h2 class="text-xl font-bold mb-4 text-red-600">Podcast</h2>
+                    @if ($podcast_terkini->isNotEmpty())
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Repeat podcast items here -->
                         @foreach ($podcast_terkini as $berita)
@@ -193,6 +222,9 @@
                             </a>
                         @endforeach
                     </div>
+                    @else
+                    <p class="text-gray-500 text-center">Tidak ada Podcast terbaru saat ini.</p>
+                @endif
                 </div>
             </div>
         </div>
