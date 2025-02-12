@@ -12,8 +12,12 @@ export default {
     ],
     theme: {
         extend: {
+            colors: {
+                'peta-red': '#be2c13',
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'poppins': ['Poppins', 'sans-serif'],
+                'sub': ['Verdana', 'Geneva', 'Tahoma', 'sans-serif'],
             },
         },
     },
