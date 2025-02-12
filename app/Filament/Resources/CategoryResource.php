@@ -10,7 +10,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-
+use Filament\Notifications\Notification;
+use Illuminate\Validation\ValidationException;
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
@@ -72,10 +73,41 @@ class CategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->before(function ($record) {
+                        // Cek apakah kategori masih digunakan di Post
+                        if ($record->posts()->exists()) {
+                            // Tampilkan notifikasi di Filament
+                            Notification::make()
+                                ->title('Gagal Menghapus')
+                                ->body('Kategori ini masih digunakan di Post dan tidak bisa dihapus.')
+                                ->danger()
+                                ->send();
+
+                            // Batalkan penghapusan dengan exception
+                            throw ValidationException::withMessages([
+                                'delete' => 'Kategori masih digunakan di Post, penghapusan dibatalkan.'
+                            ]);
+                        }
+                    }),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->before(function ($records) {
+                        foreach ($records as $record) {
+                            if ($record->posts()->exists()) {
+                                Notification::make()
+                                    ->title('Gagal Menghapus Beberapa Kategori')
+                                    ->body('Salah satu kategori masih digunakan di Post, penghapusan dibatalkan.')
+                                    ->danger()
+                                    ->send();
+
+                                throw ValidationException::withMessages([
+                                    'bulk_delete' => 'Salah satu kategori masih digunakan di Post, penghapusan dibatalkan.'
+                                ]);
+                            }
+                        }
+                    }),
             ]);
     }
 

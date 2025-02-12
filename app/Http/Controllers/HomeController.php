@@ -46,8 +46,9 @@ class HomeController extends Controller
 
     $vidio = Video::latest()->take(3)->get();
 
+    $usedTags = Post::getUsedTags();
 
-    return view('welcome', compact('post_terkini', 'berita_terkini', 'opini_terkini', 'podcast_terkini','post_populer','messages','iklan'));
+    return view('welcome', compact('post_terkini', 'berita_terkini', 'opini_terkini', 'podcast_terkini','post_populer','usedTags','messages','iklan'));
 }
 
 }

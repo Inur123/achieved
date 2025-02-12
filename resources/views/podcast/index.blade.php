@@ -34,7 +34,7 @@
                                 </div>
                                 <h3 class="font-bold mb-2">{{ $item->title }}</h3>
                                 <p class="text-gray-600 text-sm">
-                                    {{ Str::limit($item->excerpt, 100) }}
+                                    {{ Str::limit(strip_tags($item->excerpt), 100) }}
                                 </p>
                             </div>
                         </div>

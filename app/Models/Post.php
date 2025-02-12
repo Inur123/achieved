@@ -3,17 +3,27 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Spatie\Tags\Tag;
+use Spatie\Tags\HasTags;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Tags\HasTags;
 
 class Post extends Model
 {
     use HasFactory, HasTags;
 
     protected $fillable = [
-        'title', 'content', 'category_id', 'slug', 'thumbnail', 'is_published', 'published_at', 'user_id','excerpt','author_id',
+        'title',
+        'content',
+        'category_id',
+        'slug',
+        'thumbnail',
+        'is_published',
+        'published_at',
+        'user_id',
+        'excerpt',
+        'author_id',
     ];
 
     // Automatically set user_id for new posts
@@ -59,7 +69,20 @@ class Post extends Model
         return 'slug'; // Use 'slug' as the route key
     }
     public function author()
-{
-    return $this->belongsTo(Author::class);
-}
+    {
+        return $this->belongsTo(Author::class);
+    }
+
+
+    public static function getUsedTags()
+    {
+        return Tag::whereIn('id', function ($query) {
+            $query->select('taggables.tag_id')
+                ->from('taggables')
+                ->join('posts', 'taggables.taggable_id', '=', 'posts.id')
+                ->where('taggables.taggable_type', self::class) // Ambil hanya tag yang dipakai Post
+                ->where('posts.is_published', 1); // Hanya post yang is_published = 1
+        })->get();
+    }
+
 }

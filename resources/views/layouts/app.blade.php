@@ -17,31 +17,6 @@
 
 
 
-    @if (Route::is('berita.show'))
-        <meta property="og:title" content="{{ $berita->title }}">
-        <meta property="og:description" content="{{ Str::limit(strip_tags($berita->content), 150) }}">
-        <meta property="og:image" content="{{ asset('storage/' . $berita->thumbnail) }}">
-        <meta property="og:url" content="{{ route('berita.show', $berita->slug) }}">
-        <meta property="og:type" content="article">
-
-    @elseif (Route::is('opini.show'))
-        <meta property="og:title" content="{{ $opini->title }}">
-        <meta property="og:description" content="{{ Str::limit(strip_tags($opini->content), 150) }}">
-        <meta property="og:image" content="{{ asset('storage/' . $opini->thumbnail) }}">
-
-        <meta property="og:url" content="{{ route('opini.show', $opini->slug) }}">
-        <meta property="og:type" content="article">
-
-    @elseif (Route::is('podcast.show'))
-        <meta property="og:title" content="{{ $podcast->title }}">
-        <meta property="og:description" content="{{ Str::limit(strip_tags($podcast->description), 150) }}">
-        <meta property="og:image" content="{{ Storage::url($podcast->thumbnail) }}">
-        <meta property="og:url" content="{{ route('podcast.show', $podcast->slug) }}">
-        <meta property="og:type" content="video">
-
-    @endif
-
-
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 

@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Notifications\Notification;
+use Illuminate\Validation\ValidationException;
 
 class AuthorResource extends Resource
 {
@@ -73,10 +75,42 @@ class AuthorResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),  // Allows editing the author record
+                Tables\Actions\DeleteAction::make()
+                    ->before(function ($record) {
+                        if ($record->posts()->exists()) {
+                            // Tampilkan Notifikasi di UI Filament
+                            Notification::make()
+                                ->title('Gagal Menghapus')
+                                ->body('Author ini masih digunakan di Post dan tidak bisa dihapus.')
+                                ->danger()
+                                ->send();
+
+                            // Batalkan penghapusan dengan exception
+                            throw ValidationException::withMessages([
+                                'delete' => 'Author masih digunakan di Post, penghapusan dibatalkan.'
+                            ]);
+                        }
+                    }),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),  // Allows bulk deletion of authors
+                Tables\Actions\DeleteBulkAction::make()
+                    ->before(function ($records) {
+                        foreach ($records as $record) {
+                            if ($record->posts()->exists()) {
+                                // Tampilkan Notifikasi di UI Filament
+                                Notification::make()
+                                    ->title('Gagal Menghapus Beberapa Author')
+                                    ->body('Salah satu Author masih digunakan di Post, penghapusan dibatalkan.')
+                                    ->danger()
+                                    ->send();
+
+                                // Batalkan bulk delete dengan exception
+                                throw ValidationException::withMessages([
+                                    'bulk_delete' => 'Salah satu Author masih digunakan di Post, penghapusan dibatalkan.'
+                                ]);
+                            }
+                        }
+                    }),
             ]);
     }
 

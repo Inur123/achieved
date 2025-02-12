@@ -31,8 +31,9 @@ class PostResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->unique(ignoreRecord: true) // Mengabaikan unique untuk edit
                     ->maxLength(255)
+                    ->required()
                     ->reactive()
-                    ->disabled(fn($record) => $record !== null) // Hanya bisa diubah saat create
+
                     ->afterStateUpdated(function (callable $set, $state) {
                         $set('slug', Str::slug($state));
                     }),
@@ -42,14 +43,17 @@ class PostResource extends Resource
                     ->disabled(),
 
                 TinyEditor::make('content')
-                    ->nullable(),
+                    ->nullable()
+                    ->required(),
 
 
                 TinyEditor::make('excerpt')
-                    ->nullable(),
+                    ->nullable()
+                    ->required(),
 
                 Forms\Components\FileUpload::make('thumbnail')
                     ->image()
+                    ->required()
                     ->disk('public')
                     ->directory('thumbnails')
                     ->visibility('public')
@@ -57,11 +61,13 @@ class PostResource extends Resource
 
                 Forms\Components\Select::make('author_id')
                     ->relationship('author', 'name')
-                    ->disabled(fn($record) => $record !== null), // Hanya bisa diubah saat create
+                    ->required(),
+
 
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
-                    ->disabled(fn($record) => $record !== null), // Hanya bisa diubah saat create
+                     ->required(),
+
 
                 Forms\Components\SpatieTagsInput::make('name')
                     ->label('Tags')

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Post;
+use Spatie\Tags\Tag;
 use App\Models\Iklan;
 use App\Models\Video;
 use Spatie\Health\Facades\Health;
@@ -56,6 +57,22 @@ class AppServiceProvider extends ServiceProvider
         'post_populer' => $post_populer,
         'iklan' => $iklan,
         'videos_terbaru' => $videos_terbaru, // Tambahkan video terbaru ke semua view
+    ]);
+
+    $usedTags = Tag::whereIn('id', function ($query) {
+        $query->select('taggables.tag_id')
+            ->from('taggables')
+            ->join('posts', 'taggables.taggable_id', '=', 'posts.id')
+            ->where('taggables.taggable_type', Post::class) // Hanya tag dari Post
+            ->where('posts.is_published', 1); // Hanya post yang is_published = 1
+    })->get();
+
+    // Bagikan data ke semua view
+    View::share([
+        'post_populer' => $post_populer,
+        'iklan' => $iklan,
+        'videos_terbaru' => $videos_terbaru,
+        'usedTags' => $usedTags, // Tambahkan usedTags agar tersedia di semua view
     ]);
     }
 }

@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('title', $podcast->title)
-
+<meta property="og:title" content="{{ $podcast->title ?? 'Default Title' }}">
+<meta property="og:description" content="{{ Str::limit(strip_tags($podcast->content ?? 'Default Description'), 150) }}">
+<meta property="og:image" content="{{ isset($podcast->thumbnail) ? asset('storage/' . $podcast->thumbnail) : asset('images/default-image.jpg') }}">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="article">
 @include('layouts.header')
 
 <main class="container mx-auto px-4 py-8 mt-[70px]">
@@ -9,11 +13,11 @@
         <!-- Konten Utama -->
         <div class="w-full lg:w-2/3">
             <!-- Gambar Utama Full Width -->
-            <div class="w-full h-[400px] md:h-[500px] lg:h-[600px]">
-                <img src="{{ Storage::url($podcast->thumbnail) }}"
-                     alt="{{ $podcast->title }}"
-                     class="w-full h-full object-cover rounded-lg shadow-lg">
-            </div>
+            <img src="{{ Storage::url($podcast->thumbnail) }}"
+            alt="{{ $podcast->title }}"
+            class="w-full max-w-full h-auto object-contain rounded-lg">
+
+
 
             <!-- Informasi podcast -->
             <div class="mt-6">

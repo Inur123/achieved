@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('title', $berita->title)
-@section('description', strip_tags($berita->content)) <!-- You can modify this to provide a shorter description -->
-@section('image', Storage::url($berita->thumbnail))
+
+<meta property="og:title" content="{{ $berita->title ?? 'Default Title' }}">
+<meta property="og:description" content="{{ Str::limit(strip_tags($berita->content ?? 'Default Description'), 150) }}">
+<meta property="og:image" content="{{ isset($berita->thumbnail) ? asset('storage/' . $berita->thumbnail) : asset('images/default-image.jpg') }}">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="article">
 
 @include('layouts.header')
 
@@ -11,11 +15,9 @@
         <!-- Konten Utama -->
         <div class="w-full lg:w-2/3">
             <!-- Gambar Utama Full Width -->
-            <div class="w-full h-[400px] md:h-[500px] lg:h-[600px]">
-                <img src="{{ Storage::url($berita->thumbnail) }}"
-                     alt="{{ $berita->title }}"
-                     class="w-full h-full object-cover rounded-lg shadow-lg">
-            </div>
+            <img src="{{ Storage::url($berita->thumbnail) }}"
+            alt="{{ $berita->title }}"
+            class="w-full max-w-full h-auto object-contain rounded-lg">
 
             <!-- Informasi Berita -->
             <div class="mt-6">

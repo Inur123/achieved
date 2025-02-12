@@ -9,7 +9,7 @@
 
 <main class="container mx-auto px-4 py-8" style="margin-top: 50px">
     <div class="overflow-hidden flex lg:flex-row-reverse flex-col mb-8 mt-10" data-aos="zoom-in">
-        <img src="images/login.png" alt="Gambar Utama"
+        <img src="images/sdad.jpg" alt="Gambar Utama"
             class="w-full lg:w-1/2 h-96 object-cover rounded-lg hidden lg:block" />
         <div class="lg:w-1/2 me-5"
             style="
@@ -21,14 +21,14 @@
       ">
             <h1 class="text-4xl font-bold mb-2">Peta Project</h1>
             <p class="text-gray-600 text-justify mb-8">
-                Podcast dan Talkshow yang memiliki visi menjadi sumber cahaya yang
-                menerangi kompleksitas sosial, politik, hukum dan isu-isu terkini.
-                Peta project hadir sebagai media education dalam melakukan transfer
-                of knowladge, transfer of tools, opinion making dan paradigma
-                shifting.
+                Sebuah portal berita independen, Peta Project hadir untuk menjadi sumber cahaya dalam memahami kompleksitas sosial, politik, hukum, dan isu-isu terkini. Kami bukan sekadar menyajikan informasi, tetapi juga menghadirkan analisis mendalam, opini kritis, serta sudut pandang yang membangun.<br>
+                Melalui jurnalisme berbasis edukasi, Peta Project berkomitmen pada transfer of knowladge, transfer of tools, opinion making dan paradigma shifting Dengan liputan yang tajam dan wawasan yang mendalam, kami hadir sebagai kompas bagi publik dalam menghadapi realitas yang terus berkembang.
             </p>
             <p class="text-black font-bold text-justify">
-                Call us (0123) 456 - 789
+                Call us
+                <a href="https://wa.me/6285962326369" class="text-black underline">
+                    +6285962326369
+                </a>
             </p>
             <p class="text-gray-600 text-justify">For any question or concern</p>
         </div>
