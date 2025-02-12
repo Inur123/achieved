@@ -44,8 +44,8 @@ class PostResource extends Resource
                 TinyEditor::make('content')
                     ->nullable(),
 
-                Forms\Components\TextArea::make('excerpt')
-                    ->maxLength(255)
+
+                    TinyEditor::make('excerpt')
                     ->nullable(),
 
                 Forms\Components\FileUpload::make('thumbnail')
