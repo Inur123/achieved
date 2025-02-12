@@ -45,7 +45,7 @@ class PostResource extends Resource
                     ->nullable(),
 
 
-                    TinyEditor::make('excerpt')
+                TinyEditor::make('excerpt')
                     ->nullable(),
 
                 Forms\Components\FileUpload::make('thumbnail')
